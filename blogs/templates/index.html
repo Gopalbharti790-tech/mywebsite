@@ -1,0 +1,46 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block css_files %}
+
+    <link rel="stylesheet" href="{% static 'app.css' %}"> {% endblock %}
+{% block page_title %} our blog post home page {% endblock %}
+    
+{% block body_content %}  
+ 
+
+{% include "header.html" with active_page="all posts"%}
+
+
+
+<section>
+    <header> 
+        <h1>Welcome to my Blog posts</h1>
+    <h2>This is our Home Page</h2>
+    <img src=" {% static 'img/salary.jpg' %}" alt="author">
+    </header>
+</section>
+
+<section>
+    <h2>Featured posts</h2>
+    <ul>
+        {% for blog in l_blogs %}
+         <li>
+             <article><a href="{% url 'blog-post' blog=blog.slug %}">{{blog.title }}</a>
+                     <div>   <img src="{% static 'img/'|add:blog.img %}" alt="{{ blog.title}}" height="200" width="200">
+                    </div>
+                    <div>
+                        <p>{{ blog.preview }}</p>
+                     </div>
+                
+                </article>
+         </li>
+        {% endfor %}
+    </ul>
+</section>
+<section>
+    <h2>about the author</h2>
+    <p> the author has 10+ years of experince in software field</p>
+    <p>contact the author abc@gmail.com</p>
+</section>
+{% endblock %}

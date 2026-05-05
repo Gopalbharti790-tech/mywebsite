@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+About us
+{% endblock title %}
+
+
+
+{% block body_content %}
+
+<style>
+.about-hero {
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 40px;
+}
+
+.about-section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.card {
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.feature-box:hover {
+    background: #007bff;
+    color: white;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.member {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    transition: 0.3s;
+}
+
+.member:hover {
+    transform: scale(1.05);
+    background: #007bff;
+    color: white;
+}
+</style>
+
+<!-- HERO -->
+<div class="about-hero">
+    <h1>About Our Platform</h1>
+    <p>Building modern web applications with Django 🚀</p>
+</div>
+
+<!-- ABOUT -->
+<div class="about-section">
+    <div class="card">
+        <h2>Who We Are</h2>
+        <p>
+            We are a passionate team of developers focused on creating scalable 
+            and efficient web applications. Our platform is built using Django 
+            to ensure speed, security, and reliability.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Our Mission</h2>
+        <p>
+            Our mission is to deliver high-quality digital solutions that help 
+            businesses and individuals grow online. We aim to simplify complex 
+            problems with smart technology.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Our Vision</h2>
+        <p>
+            To become a leading platform for innovative web solutions and 
+            empower developers to build impactful applications.
+        </p>
+    </div>
+
+    <!-- FEATURES -->
+    <h2 style="margin-top:40px; text-align:center;">What We Offer</h2>
+
+    <div class="features">
+        <div class="feature-box">
+            <h3>⚡ Fast Performance</h3>
+            <p>Optimized Django backend ensures smooth experience.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🔒 Secure</h3>
+            <p>Built with best security practices and authentication.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>📱 Responsive</h3>
+            <p>Works perfectly on mobile, tablet, and desktop.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🎯 User Friendly</h3>
+            <p>Simple and clean UI for better usability.</p>
+        </div>
+    </div>
+
+    <!-- TEAM -->
+    <h2 style="margin-top:50px; text-align:center;">Meet Our Team</h2>
+
+    <div class="team">
+        <div class="member">
+            <h3>Gopal Bharti</h3>
+            <p>Full Stack Developer</p>
+        </div>
+
+        <div class="member">
+            <h3>Team Member</h3>
+            <p>UI Designer</p>
+        </div>
+
+        <div class="member">
+            <h3>Team Member</h3>
+            <p>Backend Developer</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock  %}
+
+

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'app.css' %}">
+{% endblock %}
+
+{% block page_title %}
+<h3 class="page-title">All Posts</h3>
+{% endblock %}
+
+{% block body_content %}
+{% include "header.html" with active_page="allpost" %}
+
+<section class="posts-section center-page">
+  <div class="container center-container">
+    <h1 class="welcome">Welcome</h1>
+
+    <h2 class="section-heading">All My Posts</h2>
+
+    {% if blogs %}
+      <ul class="posts-list">
+        {% for blog in blogs %}
+          <li class="post-item">
+            <article class="post-card" aria-labelledby="post-{{ forloop.counter }}">
+              <header class="post-header">
+                <h3 id="post-{{ forloop.counter }}" class="post-title">
+                  <a href="{% url 'blog-post' blog=blog.slug %}" class="post-link">
+                    {{ blog.title|default:"Untitled" }}
+                  </a>
+                </h3>
+                {% if blog.published_date %}
+                  <time class="post-date" datetime="{{ blog.published_date|date:'Y-m-d' }}">
+                    {{ blog.published_date|date:"F j, Y" }}
+                  </time>
+                {% endif %}
+              </header>
+
+              {% if blog.img %}
+                <div class="post-image">
+                  <a href="{% url 'blog-post' blog=blog.slug %}">
+                    <img src="{% static 'img/'|add:blog.img %}"
+                         alt="{{ blog.title|default:'Blog image' }}"
+                         height="300px"
+                         width="300px"
+                         loading="lazy"
+                         class="img-responsive">
+                  </a>
+                </div>
+              {% endif %}
+
+              <div class="post-body">
+                <p class="post-preview">{{ blog.preview|default:"No preview available." }}</p>
+              </div>
+
+              <footer class="post-footer">
+                <a class="read-more" href="{% url 'blog-post' blog=blog.slug %}">Read more</a>
+              </footer>
+            </article>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty-state">Koi post nahi mila. Thodi der baad check karein.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
+<style>/* Centering wrapper */
+.center-page { display: flex; justify-content: center; }
+.center-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers children horizontally */
+  text-align: center;  /* centers text inside elements */
+}
+
+/* Grid of cards centered */
+.posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  width: 100%;
+  justify-items: center; /* centers each grid item */
+}
+
+/* Make cards a fixed max width so they appear centered */
+.post-card {
+  width: 100%;
+  max-width: 340px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .18s ease, box-shadow .18s ease;
+  text-align: center; /* ensure inner text is centered */
+}
+
+/* Center image and keep it responsive */
+.post-image { padding: 14px; display:flex; justify-content:center; align-items:center; }
+.img-responsive { max-width: 100%; height: auto; border-radius: 6px; object-fit: cover; }
+
+/* Center header and footer content */
+.post-header, .post-body, .post-footer { padding: 12px 16px; }
+.post-title { margin: 0 0 6px 0; }
+.post-date { display: block; color: #6b7280; font-size: 13px; margin-top: 6px; }
+
+/* Read more centered */
+.post-footer { border-top: 1px solid #f1f5f9; }
+.read-more { color: #0ea5a4; text-decoration: none; font-weight: 600; display: inline-block; margin: 8px auto 0 auto; }
+
+/* Empty state centered */
+.empty-state { color: #6b7280; padding: 20px; text-align: center; }
+
+/* Small screens: keep centered and single column */
+@media (max-width: 480px) {
+  .posts-list { grid-template-columns: 1fr; }
+  .center-container { padding: 12px; }
+}
+</style>
